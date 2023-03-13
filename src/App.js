@@ -1,7 +1,12 @@
 import "./App.css";
+import Messages from "./components/messages";
 
 function App() {
-  return <div className="App">Chat App</div>;
+  return (
+    <div className="App">
+      <Messages />
+    </div>
+  );
 }
 
 export default App;
