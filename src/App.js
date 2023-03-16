@@ -1,6 +1,7 @@
 import { Component } from "react";
 import "./App.css";
 import Messages from "./components/Messages";
+import Input from "./components/Input";
 
 function randomName() {
   const adjectives = [
@@ -144,6 +145,14 @@ function randomColor() {
   return "#" + Math.floor(Math.random() * 0xffffff).toString(16);
 }
 class App extends Component {
+  onSendMessage = (message) => {
+    const messages = this.state.messages;
+    messages.push({
+      text: message,
+      member: this.state.member,
+    });
+    this.setState({ messages: messages });
+  };
   state = {
     messages: [
       {
@@ -162,10 +171,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Messages
-          messages={this.state.messages}
-          currentMember={this.state.member}
-        />
+        <div className="App">
+          <div className="App-header">
+            <h1>My Chat App</h1>
+          </div>
+          <Messages
+            messages={this.state.messages}
+            currentMember={this.state.member}
+          />
+          <Input onSendMessage={this.onSendMessage} />
+        </div>
       </div>
     );
   }
