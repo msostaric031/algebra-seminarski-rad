@@ -2,6 +2,18 @@ import { Component } from "react";
 import React from "react";
 
 class Messages extends Component {
+  generateRan() {
+    var max = 20;
+    var random = [];
+    for (var i = 0; i < max; i++) {
+      var temp = Math.floor(Math.random() * max);
+      if (random.indexOf(temp) === -1) {
+        random.push(temp);
+      } else i--;
+    }
+    return random;
+  }
+
   renderMessage(message) {
     const { member, text } = message;
     const { currentMember } = this.props;
@@ -23,7 +35,9 @@ class Messages extends Component {
     const { messages } = this.props;
     return (
       <ul className="Messages-list">
-        {messages.map((m) => this.renderMessage(m))}
+        {messages.map((m) => (
+          <span key={this.generateRan()}>{this.renderMessage(m)}</span>
+        ))}
       </ul>
     );
   }
