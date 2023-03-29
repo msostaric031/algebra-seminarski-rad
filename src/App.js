@@ -145,24 +145,44 @@ function randomColor() {
   return "#" + Math.floor(Math.random() * 0xffffff).toString(16);
 }
 class App extends Component {
-  onSendMessage = (message) => {
-    const messages = this.state.messages;
-    messages.push({
-      text: message,
-      member: this.state.member,
+  constructor() {
+    super();
+    this.drone = new window.Scaledrone("9saolsjKeqgn4HwV", {
+      data: this.state.member,
     });
-    this.setState({ messages: messages });
+    this.drone.on("open", (error) => {
+      if (error) {
+        return console.error(error);
+      }
+      const member = { ...this.state.member };
+      member.id = this.drone.clientId;
+      this.setState({ member });
+    });
+    const room = this.drone.subscribe("observable-room");
+    room.on("data", (data, member) => {
+      const messages = this.state.messages;
+      messages.push({ member, text: data });
+      this.setState({ messages });
+    });
+  }
+
+  onSendMessage = (message) => {
+    // Doesn't show user icon and name witout the commented code below -->
+    // ----
+    // const messages = this.state.messages;
+    // messages.push({
+    //   text: message,
+    //   member: this.state.member,
+    // });
+    // this.setState({ messages: messages });
+    // ----
+    this.drone.publish({
+      room: "observable-room",
+      message,
+    });
   };
   state = {
-    messages: [
-      {
-        text: "This is a test message!",
-        member: {
-          color: "blue",
-          username: "bluemoon",
-        },
-      },
-    ],
+    messages: [],
     member: {
       username: randomName(),
       color: randomColor(),
