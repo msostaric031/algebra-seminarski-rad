@@ -145,6 +145,13 @@ function randomColor() {
   return "#" + Math.floor(Math.random() * 0xffffff).toString(16);
 }
 class App extends Component {
+  state = {
+    messages: [],
+    member: {
+      username: randomName(),
+      color: randomColor(),
+    },
+  };
   constructor() {
     super();
     this.drone = new window.Scaledrone("9saolsjKeqgn4HwV", {
@@ -166,28 +173,8 @@ class App extends Component {
     });
   }
 
-  onSendMessage = (message) => {
-    // Doesn't show user icon and name witout the commented code below -->
-    // ----
-    // const messages = this.state.messages;
-    // messages.push({
-    //   text: message,
-    //   member: this.state.member,
-    // });
-    // this.setState({ messages: messages });
-    // ----
-    this.drone.publish({
-      room: "observable-room",
-      message,
-    });
-  };
-  state = {
-    messages: [],
-    member: {
-      username: randomName(),
-      color: randomColor(),
-    },
-  };
+
+
   render() {
     return (
       <div className="App">
@@ -204,6 +191,13 @@ class App extends Component {
       </div>
     );
   }
+  onSendMessage = (message) => {
+
+    this.drone.publish({
+      room: "observable-room",
+      message,
+    });
+  };
 }
 
 export default App;
