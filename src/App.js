@@ -2,6 +2,7 @@ import { Component } from "react";
 import "./App.css";
 import Messages from "./components/Messages";
 import Input from "./components/Input";
+import Sidebar from "./components/Sidebar";
 
 function randomName() {
   const adjectives = [
@@ -173,26 +174,22 @@ class App extends Component {
     });
   }
 
-
-
   render() {
     return (
       <div className="App">
-        <div className="App">
-          <div className="App-header">
-            <h1>My Chat App</h1>
-          </div>
-          <Messages
-            messages={this.state.messages}
-            currentMember={this.state.member}
-          />
-          <Input onSendMessage={this.onSendMessage} />
+        <div className="App-header">
+          <h1>My Chat App</h1>
         </div>
+        <Sidebar />
+        <Messages
+          messages={this.state.messages}
+          currentMember={this.state.member}
+        />
+        <Input onSendMessage={this.onSendMessage} />
       </div>
     );
   }
   onSendMessage = (message) => {
-
     this.drone.publish({
       room: "observable-room",
       message,
