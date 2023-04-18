@@ -146,6 +146,9 @@ function randomColor() {
   return "#" + Math.floor(Math.random() * 0xffffff).toString(16);
 }
 class App extends Component {
+  toggleSidebar = () => {
+    this.sidebar.ToggleSidebar();
+  };
   state = {
     messages: [],
     member: {
@@ -178,9 +181,16 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
+          <button onClick={this.toggleSidebar} className="sidebar-btn">
+            Sidebar
+          </button>
           <h1>My Chat App</h1>
+          <div></div>
         </div>
-        <Sidebar />
+        <Sidebar
+          ref={(sidebar) => (this.sidebar = sidebar)}
+          toggleSidebar={this.toggleSidebar}
+        />
         <Messages
           messages={this.state.messages}
           currentMember={this.state.member}

@@ -11,6 +11,8 @@
   width: 100%;
   text-align: center;
   color: white;
+  display: flex;
+  justify-content: space-between;
 }
 
 .Messages-list {
@@ -96,4 +98,7 @@ button {
   border: none;
   border-radius: 8px;
   margin-left: 10px;
+}
+.sidebar-button {
+  padding-left: 20px;
 }
