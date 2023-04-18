@@ -17,21 +17,15 @@ class Sidebar extends Component {
 
   render() {
     const { isOpen } = this.state;
+    const { toggleSidebar } = this.props;
     return (
       <>
         <div className="container-fluid mt-3">
-          <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-md">
-            <div className="container-fluid p-2">
-              <div className="form-inline ml-auto">
-                <div className="btn btn-primary" onClick={this.ToggleSidebar}>
-                </div>
-              </div>
-            </div>
-          </nav>
           <div className={`sidebar ${isOpen === true ? "active" : ""}`}>
             <div className="sd-header">
               <h4 className="mb-0">Sidebar Header</h4>
-              <div className="btn btn-primary" onClick={this.ToggleSidebar}>
+              <div className="btn btn-primary" onClick={toggleSidebar}>
+                Close Sidebar
               </div>
             </div>
             <div className="sd-body">
@@ -51,7 +45,7 @@ class Sidebar extends Component {
           </div>
           <div
             className={`sidebar-overlay ${isOpen === true ? "active" : ""}`}
-            onClick={this.ToggleSidebar}
+            onClick={toggleSidebar}
           ></div>
         </div>
       </>
