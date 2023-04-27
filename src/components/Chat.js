@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Chat.css";
 import Messages from "./Messages";
 import Input from "./Input";
@@ -8,70 +8,79 @@ function randomColor() {
   return "#" + Math.floor(Math.random() * 0xffffff).toString(16);
 }
 
-class Chat extends Component {
-  toggleSidebar = () => {
-    this.sidebar.ToggleSidebar();
-  };
+const Chat = (props) => {
+  const [messages, setMessages] = useState([]);
+  const [member, setMember] = useState({
+    username: props.username,
+    color: randomColor(),
+  });
+  const [drone, setDrone] = useState(null);
+  const [isConnected, setIsConnected] = useState(false);
 
-  state = {
-    messages: [],
-    member: {
-      username: this.props.username,
-      color: randomColor(),
-    },
-  };
-
-  constructor(props) {
-    super(props);
-    this.drone = new window.Scaledrone("9saolsjKeqgn4HwV", {
-      data: this.state.member,
+  useEffect(() => {
+    const newDrone = new window.Scaledrone("9saolsjKeqgn4HwV", {
+      data: member,
     });
-    this.drone.on("open", (error) => {
+    setDrone(newDrone);
+
+    newDrone.on("open", (error) => {
       if (error) {
-        return console.error(error);
+        console.error(error);
+        return;
       }
-      const member = { ...this.state.member };
-      member.id = this.drone.clientId;
-      this.setState({ member });
+      const newMember = { ...member };
+      newMember.id = newDrone.clientId;
+      setMember(newMember);
+      setIsConnected(true);
     });
-    const room = this.drone.subscribe("observable-room");
+
+    newDrone.on("close", (event) => {
+      console.log("Connection closed", event);
+      setIsConnected(false);
+    });
+
+    const room = newDrone.subscribe("observable-room");
     room.on("data", (data, member) => {
-      const messages = this.state.messages;
-      messages.push({ member, text: data });
-      this.setState({ messages });
+      setMessages((prevMessages) => [...prevMessages, { member, text: data }]);
     });
-  }
+  }, []);
 
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <button onClick={this.toggleSidebar} className="sidebar-btn">
-            Sidebar
-          </button>
-          <h1>{this.props.username}'s Chat App</h1>
-          <div></div>
-        </div>
-        <Sidebar
-          ref={(sidebar) => (this.sidebar = sidebar)}
-          toggleSidebar={this.toggleSidebar}
-          username={this.props.username}
-        />
-        <Messages
-          messages={this.state.messages}
-          currentMember={this.state.member}
-        />
-        <Input onSendMessage={this.onSendMessage} />
-      </div>
-    );
-  }
-
-  onSendMessage = (message) => {
-    this.drone.publish({
-      room: "observable-room",
-      message,
-    });
+  const onSendMessage = (message) => {
+    if (drone && isConnected) {
+      drone.publish({
+        room: "observable-room",
+        message,
+      });
+    } else {
+      console.log("Connection closed, retrying message publication...");
+      setTimeout(() => onSendMessage(message), 1000);
+    }
   };
-}
+
+  const sidebarRef = useRef();
+
+  const toggleSidebar = () => {
+    sidebarRef.current.toggleSidebar();
+  };
+
+  return (
+    <div className="App">
+      <div className="App-header">
+        <button onClick={toggleSidebar} className="sidebar-btn">
+          Sidebar
+        </button>
+        <h1>{props.username}'s Chat App</h1>
+        <div></div>
+      </div>
+      <Sidebar
+        ref={sidebarRef}
+        toggleSidebar={toggleSidebar}
+        username={props.username}
+      />
+      <Messages messages={messages} currentMember={member} />
+      <Input onSendMessage={onSendMessage} />
+    </div>
+  );
+};
 
 export default Chat;

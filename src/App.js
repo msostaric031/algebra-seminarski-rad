@@ -1,36 +1,27 @@
-import { Component } from "react";
+import { useState } from "react";
 import "./App.css";
 import Chat from "./components/Chat";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Login from "./components/Login";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { username: "" };
-  }
+const App = () => {
+  const [username, setUsername] = useState("");
 
-  handleLogin = (username) => {
-    this.setState({ username });
+  const handleLogin = (username) => {
+    setUsername(username);
   };
 
-  render() {
-    return (
-      <Routes>
-        <Route
-          path="/"
-          element={
-            this.state.username ? (
-              <Chat username={this.state.username} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-        <Route path="/login" element={<Login onLogin={this.handleLogin} />} />
-      </Routes>
-    );
-  }
-}
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={
+          username ? <Chat username={username} /> : <Navigate to="/login" />
+        }
+      />
+      <Route path="/login" element={<Login onLogin={handleLogin} />} />
+    </Routes>
+  );
+};
 
 export default App;
