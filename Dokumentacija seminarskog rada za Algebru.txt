@@ -1,0 +1,33 @@
+Komponente Chat aplikacije:
+
+App.js:
+
+
+Chat.js:
+
+- funkcija randomColor() vraća vrijednost za nasumično odabranu boju koja će biti prikazana pored username u chatu
+
+- 4 deklaracije stanja: - [messages, setMessages] - niz koji sadrži sve chat poruke
+			- [member, setMember] - objekt koji predstavlja trenutnog korisnika koji se logirao u aplikaciju, sadrži svojstva objekta (username, color), username se prosljeđuje u Chat.js pomoću props-a koji se dobiva iz Login forme
+			- [drone, setDrone] - drone je instanca Scaledrone klijenta koji se koristi za stvaranje i održavanje veze sa Scaledrone poslužiteljem
+			- [isConnected, setIsConnected] - boolean vrijednost koja govori je li korisnik trenutno spojen na Scaledrone server
+
+- useEffect() - hook pomoću kojeg se ostvaruje veza s Scaledrone serverom i "subscribe-a" se na "observable-room" kanal
+	      - ovaj "hook" se poziva kada se Chat.js komponenta montira prvi puta jer je kao drugi argument postavljen prazan niz, odnosno []
+ 	      - "hook" stvara novu instancu Scaledrone klijenta koristeći navedeni ID aplikacije i objekt "member" koji sadrži "username" i "color". Ova je instanca pohranjena u "state" varijabli "drone" (iznad definirana varijabla pomoću useState hook-a)
+	      - ostale funckionalnosti su vezane za postavljanje Scaledrone chat servisa koji se mogu pročitati u Scaledrone chat app tutorialu
+
+- onSendMessage() - ova funkcija se poziva kada korisnik pošalje novu poruku 
+		  - funkcija prvo provjerava postoji li instanca "drone" (state), i da li je trenutni korisnik spojen, odnosno je li "isConnected" true. Ako su oba uvjeta zadovoljena, funkcija objavljuje (eng. publishes) korisnikovu poruku u "observable-room" od Scaledrone servisa koristeći se "publish" metodom "drone" instance
+		  - ako je neki od uvjeta "false", funkcija console log-a poruku i ponovno pokušava objaviti poruku nakon jedne sekunde (setTimeout)
+
+- sidebarRef - objekt koji je kreiran pomoću useRef hook-a
+	     - useRef stvara promjenjivi "ref" objekt koji opstaje i nakon re-renderanja komponente, dakle sidebarRef sadrži referencu na instancu Sidebar.js komponente te se time omogućuje da se toggleSidebar funkcija, koja je definirana u komponenti Sidebar.js, aktivira u Chat.js komponenti
+	     - sidebarRef referenca proslijeđena je u obliku "prop-a" u komponentu Sidebar.js
+	     
+
+- toggleSidebar  - funkcija koja se poziva kada se klikne na Sidebar gumb u header-u
+		 - koristi "current" svojstvo od objekta sidebarRef kako bi pristupila komponenti Sidebar i time poziva istoimenu funkciju koja je definirana u komponenti Sidebar
+			     
+			
+		
