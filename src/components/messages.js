@@ -1,8 +1,6 @@
 import React from "react";
 
-const Messages = (props) => {
-  const { messages, currentMember } = props;
-
+const Messages = ({ messages, currentMember }) => {
   const renderMessage = (message, index) => {
     const { member, text } = message;
     const messageFromMe = member.id === currentMember.id;
