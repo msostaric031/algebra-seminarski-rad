@@ -2,17 +2,12 @@ import { Component } from "react";
 import "./Chat.css";
 import Messages from "./Messages";
 import Input from "./Input";
-import Sidebar from "./Sidebar";
 
 function randomColor() {
   return "#" + Math.floor(Math.random() * 0xffffff).toString(16);
 }
 
 class Chat extends Component {
-  toggleSidebar = () => {
-    this.sidebar.ToggleSidebar();
-  };
-
   state = {
     messages: [],
     member: {
@@ -44,19 +39,7 @@ class Chat extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <button onClick={this.toggleSidebar} className="sidebar-btn">
-            Sidebar
-          </button>
-          <h1>{this.props.username}'s Chat App</h1>
-          <div></div>
-        </div>
-        <Sidebar
-          ref={(sidebar) => (this.sidebar = sidebar)}
-          toggleSidebar={this.toggleSidebar}
-          username={this.props.username}
-        />
+      <div className="Chat">
         <Messages
           messages={this.state.messages}
           currentMember={this.state.member}
