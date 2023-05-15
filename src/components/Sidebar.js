@@ -1,4 +1,5 @@
 import React, { useState, forwardRef, useImperativeHandle } from "react";
+import { Link } from "react-router-dom";
 import "./Sidebar.css";
 
 const Sidebar = forwardRef((props, ref) => {
@@ -25,14 +26,14 @@ const Sidebar = forwardRef((props, ref) => {
         <div className="sd-body">
           <ul>
             <li>
-              <a href="#" className="sd-link">
-                Menu Item 1
-              </a>
+              <Link className="sd-link" to="/">
+                Chat
+              </Link>
             </li>
             <li>
-              <a href="#" className="sd-link">
-                Menu Item 2
-              </a>
+              <Link className="sd-link" to="/about">
+                About
+              </Link>
             </li>
           </ul>
         </div>

@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Chat.css";
 import Messages from "./Messages";
 import Input from "./Input";
-import Sidebar from "./Sidebar";
 
 function randomColor() {
   return "#" + Math.floor(Math.random() * 0xffffff).toString(16);
@@ -57,26 +56,8 @@ const Chat = (props) => {
     }
   };
 
-  const sidebarRef = useRef();
-
-  const toggleSidebar = () => {
-    sidebarRef.current.toggleSidebar();
-  };
-
   return (
-    <div className="App">
-      <div className="App-header">
-        <button onClick={toggleSidebar} className="sidebar-btn">
-          Sidebar
-        </button>
-        <h1>{props.username}'s Chat App</h1>
-        <div></div>
-      </div>
-      <Sidebar
-        ref={sidebarRef}
-        toggleSidebar={toggleSidebar}
-        username={props.username}
-      />
+    <div className="Chat">
       <Messages messages={messages} currentMember={member} />
       <Input onSendMessage={onSendMessage} />
     </div>
