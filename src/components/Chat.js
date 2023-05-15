@@ -18,7 +18,7 @@ class Chat extends Component {
 
   constructor(props) {
     super(props);
-    this.drone = new window.Scaledrone("9saolsjKeqgn4HwV", {
+    this.drone = new window.Scaledrone("PnFavtIMvMsf69yV", {
       data: this.state.member,
     });
     this.drone.on("open", (error) => {
