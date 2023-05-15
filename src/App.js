@@ -37,19 +37,28 @@ class App extends Component {
         />
         <Routes>
           <Route
-            path="/"
+            path="/algebra-seminarski-rad/"
             element={
               this.state.username ? (
                 <Chat username={this.state.username} />
               ) : (
-                <Navigate to="/login" />
+                <Navigate to="/algebra-seminarski-rad/login" />
               )
             }
           />
-          <Route path="/login" element={<Login onLogin={this.handleLogin} />} />
           <Route
-            path="/about"
-            element={this.state.username ? <About /> : <Navigate to="/login" />}
+            path="/algebra-seminarski-rad/login"
+            element={<Login onLogin={this.handleLogin} />}
+          />
+          <Route
+            path="/algebra-seminarski-rad/about"
+            element={
+              this.state.username ? (
+                <About />
+              ) : (
+                <Navigate to="/algebra-seminarski-rad/login" />
+              )
+            }
           />
         </Routes>
       </div>

@@ -32,12 +32,12 @@ class Sidebar extends Component {
             <div className="sd-body">
               <ul>
                 <li>
-                  <Link to="/" className="sd-link">
+                  <Link to="/algebra-seminarski-rad/" className="sd-link">
                     Chat
                   </Link>
                 </li>
                 <li>
-                  <Link to="/about" className="sd-link">
+                  <Link to="/algebra-seminarski-rad/about" className="sd-link">
                     About
                   </Link>
                 </li>
