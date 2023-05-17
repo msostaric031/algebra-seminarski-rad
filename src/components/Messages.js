@@ -2,17 +2,7 @@ import { Component } from "react";
 import React from "react";
 
 class Messages extends Component {
-  generateRan() {
-    var max = 20;
-    var random = [];
-    for (var i = 0; i < max; i++) {
-      var temp = Math.floor(Math.random() * max);
-      if (random.indexOf(temp) === -1) {
-        random.push(temp);
-      } else i--;
-    }
-    return random;
-  }
+  
   render() {
     const { messages } = this.props;
     return (
@@ -32,7 +22,6 @@ class Messages extends Component {
     return (
       <li
         className={className}
-        key={this.generateRan()}
         key={text + "_" + new Date().getTime().toString()}
       >
         <span
