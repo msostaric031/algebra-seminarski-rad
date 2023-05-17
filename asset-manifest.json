@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/algebra-seminarski-rad/login/static/css/main.b09791e6.css",
-    "main.js": "/algebra-seminarski-rad/login/static/js/main.d0f928eb.js",
-    "index.html": "/algebra-seminarski-rad/login/index.html",
-    "main.b09791e6.css.map": "/algebra-seminarski-rad/login/static/css/main.b09791e6.css.map",
-    "main.d0f928eb.js.map": "/algebra-seminarski-rad/login/static/js/main.d0f928eb.js.map"
+    "main.css": "/algebra-seminarski-rad/static/css/main.b09791e6.css",
+    "main.js": "/algebra-seminarski-rad/static/js/main.d0f928eb.js",
+    "index.html": "/algebra-seminarski-rad/index.html",
+    "main.b09791e6.css.map": "/algebra-seminarski-rad/static/css/main.b09791e6.css.map",
+    "main.d0f928eb.js.map": "/algebra-seminarski-rad/static/js/main.d0f928eb.js.map"
   },
   "entrypoints": [
     "static/css/main.b09791e6.css",
