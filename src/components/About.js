@@ -15,13 +15,6 @@ function About() {
     <div className="about">
       <div className="container">
         <div className="row align-items-center my-5">
-          <div className="col-lg-7">
-            <img
-              className="img-fluid rounded mb-4 mb-lg-0 appLogo"
-              src={appLogo}
-              alt="App logo"
-            />
-          </div>
           <div className="col-lg-5">
             <h1 className="font-weight-bold">About</h1>
             <p>
@@ -36,6 +29,13 @@ function About() {
               and frameworks such as React and React Router.
             </p>
           </div>
+          <div className="col-lg-7">
+            <img
+              className="img-fluid rounded mb-4 mb-lg-0 appLogo"
+              src={appLogo}
+              alt="App logo"
+            />
+          </div>
         </div>
         <div className="row align-items-top my-5 contact-container">
           <div className="col-lg-5">
@@ -45,7 +45,7 @@ function About() {
               chat with us, feel free to send us a message!
             </p>
           </div>
-          <div className="col-lg-7 form-container">
+          <div className=" col-lg-7 form-container">
             <form className="contact-form">
               <div className="contact-element">
                 <label htmlFor="name">Name</label>
