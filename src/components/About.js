@@ -29,14 +29,10 @@ function About() {
           </p>
         </div>
         <div className="col-lg-7">
-          <img
-            className="img-fluid rounded mb-4 mb-lg-0 appLogo"
-            src={appLogo}
-            alt="App logo"
-          />
+          <img className="mb-4 appLogo" src={appLogo} alt="App logo" />
         </div>
       </div>
-      <div className="row align-items-top my-5 contact-container">
+      <div className="row align-items-top contact-container">
         <div className="col-lg-5">
           <h1 className="font-weight-bold ">Contact</h1>
           <p>
