@@ -1,0 +1,23 @@
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+textarea {
+  width: 100%;
+}
+label {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.contact-element {
+  margin-top: 10px;
+}
+
+.appLogo {
+  height: 400px;
+  width: 600px;
+}
+.contact-container {
+  border-top: 1px solid gray;
+  padding-top: 20px;
+}
