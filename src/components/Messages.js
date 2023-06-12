@@ -1,4 +1,4 @@
-import {Component} from "react";
+import { Component } from "react";
 import React from "react";
 
 class Messages extends Component {
@@ -14,30 +14,36 @@ class Messages extends Component {
     return random;
   }
   render() {
-    const {messages} = this.props;
+    const { messages } = this.props;
     return (
       <ul className="Messages-list">
-        {messages.map(m => this.renderMessage(m))}
+        {messages.map((m) => this.renderMessage(m))}
       </ul>
     );
   }
 
   renderMessage(message) {
-    const {member, text} = message;
-    const {currentMember} = this.props;
+    const { member, text } = message;
+    const { currentMember } = this.props;
     const messageFromMe = member.id === currentMember.id;
-    const className = messageFromMe ?
-      "Messages-message currentMember" : "Messages-message";
+    const className = messageFromMe
+      ? "Messages-message currentMember"
+      : "Messages-message";
+
+    const timestamp = new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
     return (
-      <li className={className} key={this.generateRan()}  >
-      <span
-        className="avatar"
-        style={{backgroundColor: member.clientData.color}}
-      />
+      <li className={className} key={this.generateRan()}>
+        <div className="timestamp">{timestamp}</div>
+
+        <span
+          className="avatar"
+          style={{ backgroundColor: member.clientData.color }}
+        />
         <div className="Message-content">
-          <div className="username">
-            {member.clientData.username}
-          </div>
+          <div className="username">{member.clientData.username}</div>
           <div className="text">{text}</div>
         </div>
       </li>
